@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["bash"]
+
+[phases.build]
+cmds = [
+  "dotnet publish Backend/Backend.csproj -c Release -o /app/out /p:UseAppHost=false",
+  "ls -la /app/out"
+]
+
+[start]
+cmd = "sh -lc 'cd /app && dotnet /app/out/*.dll'"
