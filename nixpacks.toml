@@ -1,0 +1,14 @@
+# nixpacks.toml
+[phases.setup]
+# встановлюємо .NET 9 SDK з nixpkgs
+nixPkgs = ["dotnet-sdk_9"]
+
+[phases.install]
+cmds = ["dotnet restore"]
+
+[phases.build]
+cmds = ["dotnet publish Backend/Backend.csproj -c Release -o /app/out --no-restore"]
+
+[start]
+# Railway дає PORT, слухаємо 0.0.0.0
+cmd = "ASPNETCORE_URLS=http://0.0.0.0:$5014 dotnet /app/out/Backend.dll"
