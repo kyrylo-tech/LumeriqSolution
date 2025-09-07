@@ -11,4 +11,4 @@ cmds = ["dotnet publish Backend/Backend.csproj -c Release -o /app/out --no-resto
 
 [start]
 # Railway дає PORT, слухаємо 0.0.0.0
-cmd = "ASPNETCORE_URLS=http://0.0.0.0:$5014 dotnet /app/out/Backend.dll"
+cmd = "ASPNETCORE_URLS=http://0.0.0.0:5014 dotnet /app/out/Backend.dll"
