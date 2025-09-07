@@ -1,26 +1,26 @@
-# ---- build ----
+# ---- build stage ----
 FROM mcr.microsoft.com/dotnet/sdk:9.0.101 AS build
 WORKDIR /src
 
-# кешуємо restore
+# Кешуємо restore
 COPY Backend/Backend.csproj Backend/
 RUN dotnet restore Backend/Backend.csproj
 
-# копіюємо все та публікуємо
+# Копіюємо решту та публікуємо у /app/out
 COPY . .
 RUN dotnet publish Backend/Backend.csproj -c Release -o /app/out /p:UseAppHost=false
-
-# корисно: покажемо вивід, щоб бачитu ім'я dll
+# Перевірка, що DLL справді зібрався
 RUN ls -la /app/out
 
-# ---- runtime ----
+# ---- runtime stage ----
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/out ./
 
-ENV ASPNETCORE_URLS=http://+:8080 \
-    DOTNET_CLI_TELEMETRY_OPTOUT=1
+# Порт, який дає платформа
+ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
 EXPOSE 8080
 
-# якщо назва dll невідома — запускаємо першу знайдену
+# Якщо впевнений у назві -> ["dotnet","Backend.dll"]
+# Якщо назва може відрізнятися — запускаємо перший .dll у /app
 ENTRYPOINT ["/bin/sh","-lc","dotnet *.dll"]

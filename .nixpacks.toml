@@ -3,9 +3,10 @@ nixPkgs = ["bash"]
 
 [phases.build]
 cmds = [
+  "dotnet --info || true",
   "dotnet publish Backend/Backend.csproj -c Release -o /app/out /p:UseAppHost=false",
   "ls -la /app/out"
 ]
 
 [start]
-cmd = "sh -lc 'cd /app && dotnet /app/out/*.dll'"
+cmd = "sh -lc 'ASPNETCORE_URLS=http://0.0.0.0:$PORT dotnet /app/out/*.dll'"
