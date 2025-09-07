@@ -1,7 +1,7 @@
 # nixpacks.toml
 [phases.setup]
 # встановлюємо .NET 9 SDK з nixpkgs
-nixPkgs = ["dotnet-sdk_8"]
+nixPkgs = ["dotnet-sdk_9"]
 
 [phases.install]
 cmds = ["dotnet restore"]
