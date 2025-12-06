@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{6CF57B2B-4BFC-4565-A2F5-1004966CFFCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{1A5FA3AB-F8E5-4927-B21C-5A4CD13F6328}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CF57B2B-4BFC-4565-A2F5-1004966CFFCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF57B2B-4BFC-4565-A2F5-1004966CFFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF57B2B-4BFC-4565-A2F5-1004966CFFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF57B2B-4BFC-4565-A2F5-1004966CFFCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A5FA3AB-F8E5-4927-B21C-5A4CD13F6328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A5FA3AB-F8E5-4927-B21C-5A4CD13F6328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A5FA3AB-F8E5-4927-B21C-5A4CD13F6328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A5FA3AB-F8E5-4927-B21C-5A4CD13F6328}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
