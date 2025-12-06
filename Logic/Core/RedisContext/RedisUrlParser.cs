@@ -4,8 +4,12 @@ public static class RedisUrlParser
 {
     public static string Convert(string redisUrl)
     {
-        if (string.IsNullOrWhiteSpace(redisUrl)) return "";
-        
+        if (string.IsNullOrWhiteSpace(redisUrl))
+            return "";
+
+        if (!redisUrl.StartsWith("redis://", StringComparison.OrdinalIgnoreCase))
+            return redisUrl;
+
         var uri = new Uri(redisUrl);
 
         var host = uri.Host;

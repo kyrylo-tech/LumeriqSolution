@@ -1,4 +1,5 @@
 ﻿using Logic.Core.RedisContext;
+using Logic.Core.DbContext;
 using Logic.Repositories.Auth;
 using Logic.Services;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ public static class Extensions
     {
         var connString = RedisUrlParser.Convert(redisUrl);
 
-        services.AddSingleton<IConnectionMultiplexer>(sp =>
+        services.AddSingleton<IConnectionMultiplexer>(_ =>
             ConnectionMultiplexer.Connect(connString));
 
         services.AddSingleton<RedisContext>();
@@ -23,14 +24,16 @@ public static class Extensions
     
     public static IServiceCollection AddAppData(this IServiceCollection services, string databaseUrl)
     {
+        var connString = PostgresUrlParser.Convert(databaseUrl);
+
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(databaseUrl));
-        
+            options.UseNpgsql(connString));
+
         services.AddScoped<IAuthRepository, AuthRepository>();
         
         return services;
     }
-    
+
     public static IServiceCollection AddAppServices(this IServiceCollection services)
     {
         services.AddScoped<AuthService>();
