@@ -1,5 +1,7 @@
 using Logic;
 using DotNetEnv;
+using Logic.Services;
+using Microsoft.EntityFrameworkCore;
 
 Env.Load(".env");
 
@@ -18,6 +20,12 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.Services.CreateScope()
+    .ServiceProvider
+    .GetRequiredService<ApplicationDbContext>()
+    .Database.Migrate();
+
 app.MapControllers();
 app.UseSwagger();
 app.UseSwaggerUI();
