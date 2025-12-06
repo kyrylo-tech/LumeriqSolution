@@ -10,16 +10,10 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
         
-        var root = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
-        var envPath = Path.Combine(root, ".env");
-
-        Env.Load(envPath);
-
+        Env.Load(".env");
         var databaseUrl = Env.GetString("DATABASE_URL");
         
         optionsBuilder.UseNpgsql(databaseUrl);
-        
-        // optionsBuilder.UseNpgsql("Host=localhost;Database=lumeriq;Username=postgres;Password=localhost");
 
         return new ApplicationDbContext(optionsBuilder.Options);
     }

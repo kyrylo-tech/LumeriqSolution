@@ -1,10 +1,7 @@
 using Logic;
 using DotNetEnv;
 
-var root = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
-var envPath = Path.Combine(root, ".env");
-
-Env.Load(envPath);
+Env.Load(".env");
 
 var redisUrl = Env.GetString("REDIS_URL");
 var databaseUrl = Env.GetString("DATABASE_URL");
