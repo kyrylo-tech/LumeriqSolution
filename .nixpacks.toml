@@ -9,4 +9,4 @@ cmds = [
 ]
 
 [start]
-cmd = "sh -lc 'ASPNETCORE_URLS=http://0.0.0.0:$PORT dotnet /app/out/*.dll'"
+cmd = "sh -lc 'ASPNETCORE_URLS=http://0.0.0.0:$PORT dotnet /app/WebAPI.dll'"
