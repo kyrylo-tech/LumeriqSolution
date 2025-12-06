@@ -1,18 +1,24 @@
-FROM mcr.microsoft.comdotnetsdk9.0.101 AS build
-WORKDIR src
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
-COPY BackendBackend.csproj Backend
-RUN dotnet restore BackendBackend.csproj
+WORKDIR /src
+
+COPY WebAPI/WebAPI.csproj WebAPI/
+COPY Logic/Logic.csproj Logic/
+
+RUN dotnet restore WebAPI/WebAPI.csproj
 
 COPY . .
-RUN dotnet publish BackendBackend.csproj -c Release -o appout pUseAppHost=false
-RUN ls -la appout   # дебаг побачиш назву DLL у білд-логах
 
-FROM mcr.microsoft.comdotnetaspnet9.0
-WORKDIR app
-COPY --from=build appout .
+RUN dotnet publish WebAPI/WebAPI.csproj -c Release -o /out /p:UseAppHost=false
 
-ENV ASPNETCORE_URLS=http0.0.0.0${PORT}
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
+
+WORKDIR /app
+
+COPY --from=build /out .
+
+ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
 EXPOSE 8080
 
-ENTRYPOINT [binsh,-lc,dotnet .dll]
+ENTRYPOINT ["dotnet", "WebAPI.dll"]
