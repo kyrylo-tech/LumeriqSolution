@@ -3,10 +3,9 @@ nixPkgs = ["bash"]
 
 [phases.build]
 cmds = [
-  "dotnet --info || true",
   "dotnet publish WebAPI/WebAPI.csproj -c Release -o /app/out /p:UseAppHost=false",
   "ls -la /app/out"
 ]
 
 [start]
-cmd = "sh -lc 'ASPNETCORE_URLS=http://0.0.0.0:$PORT dotnet /app/WebAPI.dll'"
+cmd = "sh -lc 'ASPNETCORE_URLS=http://0.0.0.0:$PORT dotnet /app/out/WebAPI.dll'"
