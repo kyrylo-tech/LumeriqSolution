@@ -23,4 +23,5 @@ ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
 
 EXPOSE 8080
 
+RUN ls -la
 ENTRYPOINT ["dotnet", "WebAPI.dll"]
